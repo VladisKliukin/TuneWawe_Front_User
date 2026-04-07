@@ -6,6 +6,7 @@ export interface AuthContextType {
     login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
     logout: () => void;
     isAuthenticated: () => boolean;
+    getAuthHeaders: () => { Authorization: string } | null;
 }
 
 export interface User {
@@ -19,6 +20,7 @@ export interface AuthResponse {
     email?: string;
     role?: string;
 }
+
 export type LoginProps = {
     onSwitchToRegister: () => void;
 };

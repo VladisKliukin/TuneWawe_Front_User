@@ -1,8 +1,66 @@
-const DisplayAlbum = () =>{
+import type {Album} from "../context/player/PlayerTypes.ts";
+import {assets} from "../assets/assets.ts";
+import {Clock, Heart, ListMusic, Timer} from "lucide-react";
+import {usePlayer} from "../context/player/usePlayer.ts";
 
-    return <div>
-        Display Album
-    </div>
-}
+type DisplayAlbumProps = {
+    album: Album | undefined;
+};
+
+const DisplayAlbum = ({album}: DisplayAlbumProps) => {
+
+    const {songsData} = usePlayer();
+
+    return album ? (
+        <>
+            <div className="mt-10 flex gap-8 flex-col md:flex-row md:items-end ">
+                <img src={album.imageUrl} alt={album.name} className="w-48 rounded"/>
+                <div className="flex flex-col">
+                    <p>Playlist</p>
+                    <h2 className="text-5xl font-bold mb-4 md:text-7xl">
+                        {album.name}
+                    </h2>
+                    <h4>{album.desc}</h4>
+                    <p className="mt-1">
+                        <div className="flex">
+                            <img src={assets.logo} alt="Logo" className="inline-block w-8 mr-1"/>
+                            <b>TuneWave</b> <Heart className="w-5 h-5 fill-purple-400 text-purple-900 ml-5"/> <b
+                            className="ml-1"> 1,23,456</b> <ListMusic className="ml-5"/> <b className="ml-1">6
+                            Songs </b> <Timer className="ml-5"/> <b className="ml-1">about 2 hr 30min</b>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            {/* List song */}
+
+            <div className="grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7]">
+                <p>
+                    <b className="mr-4">#</b>
+                </p>
+                <p>Album</p>
+                <p className="hidden sm:block">Data added</p>
+                <Clock className="m-auto w-4"/>
+            </div>
+            <hr/>
+            {songsData.filter(song => song.album === album.name)
+                .map((song, index) => (
+                    <div
+                        key={index}
+                        className="grid grid-cols-3 sm:grid-cols-4 gap-2 p2 items-center text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer mt-5">
+                        <p className="text-white">
+                            <b className="mr-4 text-[#a7a7a7]">{index + 1}</b>
+                            <img src={song.image} alt="" className="inline w-15 mr-5"/>
+                        </p>
+                        <p className="text-[15px]">{song.album}</p>
+                        <p className="text-[15px] hidden sm:block">5 days ago</p>
+                        <p className="text-[15px] text-center">{song.duration}</p>
+                    </div>
+                ))
+            }
+
+        </>
+    ) : null;
+
+};
 
 export default DisplayAlbum;

@@ -117,7 +117,9 @@ const AuthProvider = ({children}: { children: ReactNode }) => {
         localStorage.removeItem("userToken");
         localStorage.removeItem("userData");
     }
-
+const getAuthHeaders = () => {
+      return   token ? {Authorization: `Bearer ${token}`} : null;
+}
 
     const contextValue: AuthContextType = {
         user,
@@ -126,7 +128,8 @@ const AuthProvider = ({children}: { children: ReactNode }) => {
         register,
         login,
         isAuthenticated,
-        logout
+        logout,
+        getAuthHeaders
     };
 
     return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
