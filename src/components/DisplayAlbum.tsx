@@ -1,9 +1,10 @@
 import type {Album} from "../context/player/PlayerTypes.ts";
-import {assets} from "../assets/assets.ts";
-import {Clock, Heart, ListMusic, Timer} from "lucide-react";
-import {usePlayer} from "../context/player/usePlayer.ts";
 
-type DisplayAlbumProps = {
+import {Clock} from "lucide-react";
+import {usePlayer} from "../context/player/usePlayer.ts";
+import AlbumStats from "./AlbumStats.tsx";
+
+export type DisplayAlbumProps = {
     album: Album | undefined;
 };
 
@@ -21,15 +22,14 @@ const DisplayAlbum = ({album}: DisplayAlbumProps) => {
                         {album.name}
                     </h2>
                     <h4>{album.desc}</h4>
-                    <p className="mt-1">
-                        <div className="flex">
-                            <img src={assets.logo} alt="Logo" className="inline-block w-8 mr-1"/>
-                            <b>TuneWave</b> <Heart className="w-5 h-5 fill-purple-400 text-purple-900 ml-5"/> <b
-                            className="ml-1"> 1,23,456</b> <ListMusic className="ml-5"/> <b className="ml-1">6
-                            Songs </b> <Timer className="ml-5"/> <b className="ml-1">about 2 hr 30min</b>
-                        </div>
-                    </p>
+
+
+
                 </div>
+
+            </div>
+            <div className="mt-3 flex justify-end ">
+                <AlbumStats album={album}/>
             </div>
             {/* List song */}
 

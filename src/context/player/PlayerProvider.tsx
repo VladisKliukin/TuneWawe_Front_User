@@ -46,6 +46,12 @@ const PlayerProvider = ({children}: { children: ReactNode }) => {
         }
     };
 
+    const updateAlbumInState = (updatedAlbum: Album) => {
+        setAlbumsData((prevAlbums) =>
+            prevAlbums.map((album) => (album._id === updatedAlbum._id ? updatedAlbum : album))
+        );
+    };
+
     useEffect(() => {
 
 
@@ -62,6 +68,7 @@ const PlayerProvider = ({children}: { children: ReactNode }) => {
         loading,
         getSongsData,
         getAlbumsData,
+        updateAlbumInState,
     };
 
     return <PlayerContext.Provider value={contextValue}>{children}</PlayerContext.Provider>;

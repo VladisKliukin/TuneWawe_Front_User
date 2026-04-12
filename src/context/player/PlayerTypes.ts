@@ -24,6 +24,7 @@ export interface Album {
     desc: string;
     bgColor: string;
     imageUrl: string;
+    likedUserIds: string[];
 };
 
 export interface PlayerContextType {
@@ -32,12 +33,13 @@ export interface PlayerContextType {
     loading: boolean;
     getSongsData: () => Promise<void>;
     getAlbumsData: () => Promise<void>;
+    updateAlbumInState: (updatedAlbum: Album) => void;
 };
 
  export type AlbumItemProps = {
     name: string;
     desc: string;
-    id: string;
+    _id: string;
     image: string;
 };
 
